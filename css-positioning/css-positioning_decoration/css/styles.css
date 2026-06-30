@@ -44,7 +44,7 @@ Hint: The z-index can also be negative!
   border-radius: 16px;
   rotate: -15deg;
   position: absolute;
-  left: 0;
+  left: 50px;
   bottom: 0;
   z-index: -10;
 }
