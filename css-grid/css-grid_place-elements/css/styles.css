@@ -33,6 +33,7 @@ body {
   grid-template-columns: repeat(5, 1fr 2fr);
   grid-template-rows: repeat(10, 50px);
   padding: 10px;
+  grid-auto-flow: row;
 }
 
 .container__element {
@@ -57,24 +58,29 @@ body {
 
 .element-1 {
   /* Add styles here */
+  grid-area: 2 / 3 / 2 / 5;
 }
 
 .element-2 {
   /* Add styles here */
+  grid-area: 2 / 5 / 2 / 11;
 }
 
 .element-5 {
   /* Add styles here */
+  grid-area: 3 / 3 / 5 / 5;
 }
 
 .element-8 {
   /* Add styles here */
+  grid-area: 3 / 7 / 5 / 8;
 }
 
 .element-spiced {
-  /* Add styles here */
+  grid-area: 1 / 1 / 2 / 11;
 }
 
 .element-20 {
   /* Add styles here */
+  grid-area: 6 / 1 / 8 / 2;
 }
