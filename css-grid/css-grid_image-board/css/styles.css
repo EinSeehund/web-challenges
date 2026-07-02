@@ -9,15 +9,20 @@ body {
   font-family: system-ui;
 }
 
-
-
 .image-board__container {
+  max-width: 1000px;
+  margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 300px 200px 300px;
   gap: 1rem;
   padding: 1rem;
   /* Add styles here */
+  display: grid;
+  grid-template-areas:
+    "i1 i4 i3"
+    "i2 i4 i6"
+    "i2 i5 i6";
 }
 
 .image-board__image {
@@ -25,29 +30,37 @@ body {
   height: 100%;
   object-fit: cover;
   border-radius: 14px;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  box-shadow:
+    rgba(0, 0, 0, 0.12) 0px 1px 3px,
+    rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
 .image-board__image--1 {
   /* Add styles here */
+  grid-area: i1;
 }
 
 .image-board__image--2 {
   /* Add styles here */
+  grid-area: i2;
 }
 
 .image-board__image--3 {
   /* Add styles here */
+  grid-area: i3;
 }
 
 .image-board__image--4 {
   /* Add styles here */
+  grid-area: i4;
 }
 
 .image-board__image--5 {
   /* Add styles here */
+  grid-area: i5;
 }
 
 .image-board__image--6 {
   /* Add styles here */
+  grid-area: i6;
 }
