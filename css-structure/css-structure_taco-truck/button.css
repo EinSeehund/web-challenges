@@ -1,0 +1,21 @@
+.card__button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card__button--active {
+  background-color: var(--body-bg);
+  padding: 10px 20px;
+  /* border: none; */
+  border-radius: 5px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.card__button--disabled {
+  background-color: var(--header-bg);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
