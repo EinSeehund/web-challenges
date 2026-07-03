@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Challenge 3: Media and Motion</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Verdana, sans-serif;
+      animation: colorPulse 0.4s infinite;
+    }
+    @keyframes colorPulse {
+      0% { background: #ffffff; }
+      50% { background: #c9f5ff; }
+      100% { background: #ffffff; }
+    }
+    .hero {
+      padding: 24px;
+      text-align: center;
+    }
+    .btn-icon {
+      border: 0;
+      background: #111;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .gallery img {
+      width: 280px;
+      height: 180px;
+      object-fit: cover;
+      margin: 8px;
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <h1>Festival Recap 2026</h1>
+    <p>Best moments from our event.</p>
+    <button class="btn-icon">▶</button>
+  </section>
+
+  <section class="gallery">
+    <img src="https://picsum.photos/id/10/600/400" alt="image">
+    <img src="https://picsum.photos/id/20/600/400">
+    <img src="https://picsum.photos/id/30/600/400" alt="photo">
+  </section>
+
+  <section class="hero">
+    <h2>Highlight Video</h2>
+    <video controls autoplay>
+      <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+    </video>
+  </section>
+</body>
+</html>
