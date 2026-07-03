@@ -1,102 +1,110 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reference 2: Keyboard Modal</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Gill Sans", sans-serif;
-      background: #f8fafc;
-      color: #1f2937;
-    }
-    main {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 24px;
-    }
-    button {
-      padding: 10px 14px;
-      border-radius: 8px;
-      border: 0;
-      cursor: pointer;
-      background: #0a66c2;
-      color: white;
-      font-weight: 700;
-    }
-    dialog {
-      border: none;
-      border-radius: 12px;
-      padding: 16px;
-      width: min(420px, 90vw);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
-    }
-    dialog::backdrop {
-      background: rgba(0, 0, 0, 0.45);
-    }
-    .row {
-      display: flex;
-      gap: 10px;
-      margin-top: 12px;
-    }
-    .danger {
-      background: #b42318;
-    }
-    .secondary {
-      background: #475467;
-    }
-    :focus-visible {
-      outline: 3px solid #0a66c2;
-      outline-offset: 2px;
-    }
-  </style>
-</head>
-<body>
-  <main>
-    <h1>Account Settings</h1>
-    <p>Update profile details and security options.</p>
-    <button id="openBtn" type="button">Open Delete Confirmation</button>
-    <p><a href="#">Notifications</a></p>
-    <p><a href="#">Privacy</a></p>
-    <p><a href="#">Billing</a></p>
-  </main>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Reference 2: Keyboard Modal</title>
+        <style>
+            body {
+                margin: 0;
+                font-family: "Gill Sans", sans-serif;
+                background: #f8fafc;
+                color: #1f2937;
+            }
+            main {
+                max-width: 860px;
+                margin: 0 auto;
+                padding: 24px;
+            }
+            button {
+                padding: 10px 14px;
+                border-radius: 8px;
+                border: 0;
+                cursor: pointer;
+                background: #0a66c2;
+                color: white;
+                font-weight: 700;
+            }
+            dialog {
+                border: none;
+                border-radius: 12px;
+                padding: 16px;
+                width: min(420px, 90vw);
+                box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+            }
+            dialog::backdrop {
+                background: rgba(0, 0, 0, 0.45);
+            }
+            .row {
+                display: flex;
+                gap: 10px;
+                margin-top: 12px;
+            }
+            .danger {
+                background: #b42318;
+            }
+            .secondary {
+                background: #475467;
+            }
+            :focus-visible {
+                outline: 3px solid #0a66c2;
+                outline-offset: 2px;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <h1>Account Settings</h1>
+            <p>Update profile details and security options.</p>
+            <button id="openBtn" type="button">Open Delete Confirmation</button>
+            <p><a href="#">Notifications</a></p>
+            <p><a href="#">Privacy</a></p>
+            <p><a href="#">Billing</a></p>
+        </main>
 
-  <dialog id="confirmDialog" aria-labelledby="dialog-title" aria-describedby="dialog-desc">
-    <h2 id="dialog-title">Confirm account deletion</h2>
-    <p id="dialog-desc">This action permanently removes account data.</p>
-    <label for="confirmInput">Type DELETE to confirm</label>
-    <input id="confirmInput" type="text" autocomplete="off">
-    <div class="row">
-      <button class="secondary" id="cancelBtn" type="button">Cancel</button>
-      <button class="danger" type="button">Delete account</button>
-    </div>
-  </dialog>
+        <dialog
+            id="confirmDialog"
+            aria-labelledby="dialog-title"
+            aria-describedby="dialog-desc"
+        >
+            <h2 id="dialog-title">Confirm account deletion</h2>
+            <p id="dialog-desc">
+                This action permanently removes account data.
+            </p>
+            <label for="confirmInput">Type DELETE to confirm</label>
+            <input id="confirmInput" type="text" autocomplete="off" />
+            <div class="row">
+                <button class="secondary" id="cancelBtn" type="button">
+                    Cancel
+                </button>
+                <button class="danger" type="button">Delete account</button>
+            </div>
+        </dialog>
 
-  <script>
-    const dialog = document.getElementById("confirmDialog");
-    const openBtn = document.getElementById("openBtn");
-    const cancelBtn = document.getElementById("cancelBtn");
-    const input = document.getElementById("confirmInput");
+        <script>
+            const dialog = document.getElementById("confirmDialog");
+            const openBtn = document.getElementById("openBtn");
+            const cancelBtn = document.getElementById("cancelBtn");
+            const input = document.getElementById("confirmInput");
 
-    openBtn.addEventListener("click", () => {
-      dialog.showModal();
-      input.focus();
-    });
+            openBtn.addEventListener("click", () => {
+                dialog.showModal();
+                input.focus();
+            });
 
-    cancelBtn.addEventListener("click", () => {
-      dialog.close();
-      openBtn.focus();
-    });
+            cancelBtn.addEventListener("click", () => {
+                dialog.close();
+                openBtn.focus();
+            });
 
-    dialog.addEventListener("close", () => {
-      openBtn.focus();
-    });
+            dialog.addEventListener("close", () => {
+                openBtn.focus();
+            });
 
-    dialog.addEventListener("cancel", (event) => {
-      event.preventDefault();
-      dialog.close();
-    });
-  </script>
-</body>
+            dialog.addEventListener("cancel", (event) => {
+                event.preventDefault();
+                dialog.close();
+            });
+        </script>
+    </body>
 </html>

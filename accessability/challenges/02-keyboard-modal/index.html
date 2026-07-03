@@ -1,88 +1,192 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Challenge 2: Keyboard Modal</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Times New Roman", serif;
-      background: #f4f4f4;
-    }
-    .page {
-      padding: 24px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-      display: none;
-    }
-    .modal {
-      position: fixed;
-      top: 20%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 360px;
-      background: white;
-      padding: 16px;
-      border-radius: 10px;
-      display: none;
-    }
-    .fake-link {
-      color: blue;
-      text-decoration: underline;
-      cursor: pointer;
-      display: inline-block;
-      margin-top: 12px;
-    }
-  </style>
-</head>
-<body>
-  <div class="page">
-    <h1>Account Settings</h1>
-    <p>Update profile details and security options.</p>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Challenge 2: Keyboard Modal</title>
+        <style>
+            /*
+             * This challenge demonstrates an accessible confirmation dialog.
+             * Key goals:
+             * 1) Keyboard users can open and close the modal.
+             * 2) Focus moves into the modal when opened.
+             * 3) Focus cannot move to background content while open.
+             * 4) Focus returns to the trigger button when closed.
+             */
+            body {
+                margin: 0;
+                font-family: "Times New Roman", serif;
+                background: #f4f4f4;    
+                color: #111111;
+            }
 
-    <button id="openBtn" type="button">Open Delete Confirmation</button>
+            main {
+                padding: 24px;
+                max-width: 900px;
+                margin: 0 auto;
+            }
 
-    <p><a href="#">Notifications</a></p>
-    <p><a href="#">Privacy</a></p>
-    <p><a href="#">Billing</a></p>
-  </div>
+            button {
+                padding: 10px 14px;
+                border: 0;
+                border-radius: 8px;
+                cursor: pointer;
+                background: #0b57d0;
+                color: #ffffff;
+                font-weight: 700;
+            }
 
-  <div class="modal-backdrop" id="backdrop"></div>
+            .danger {
+                background: #a61b1b;
+            }
 
-  <div class="modal" id="modal">
-    <h2>Confirm action</h2>
-    <p>This will remove your account data.</p>
+            .secondary {
+                background: #4b5563;
+            }
 
-    <input type="text" placeholder="Type DELETE to confirm">
+            .actions {
+                display: flex;
+                gap: 10px;
+                margin-top: 14px;
+            }
 
-    <div class="fake-link" id="cancel">Cancel</div>
-    <button type="button">Delete Account</button>
-  </div>
+            label {
+                display: block;
+                margin-top: 12px;
+                margin-bottom: 4px;
+                font-weight: 600;
+            }
 
-  <script>
-    const modal = document.getElementById("modal");
-    const backdrop = document.getElementById("backdrop");
-    const openBtn = document.getElementById("openBtn");
-    const cancel = document.getElementById("cancel");
+            input {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #c9c9c9;
+                border-radius: 6px;
+            }
 
-    function openModal() {
-      modal.style.display = "block";
-      backdrop.style.display = "block";
-    }
+            /*
+             * <dialog> gives us semantic modal behavior by default.
+             * showModal() creates a real modal layer that blocks background interaction.
+             */
+            dialog {
+                width: min(420px, 90vw);
+                border: none;
+                border-radius: 12px;
+                padding: 16px;
+                box-shadow: 0 14px 36px rgba(0, 0, 0, 0.25);
+            }
 
-    function closeModal() {
-      modal.style.display = "none";
-      backdrop.style.display = "none";
-    }
+            dialog::backdrop {
+                background: rgba(0, 0, 0, 0.45);
+            }
 
-    openBtn.addEventListener("click", openModal);
-    cancel.addEventListener("click", closeModal);
-  </script>
-</body>
+            /*
+             * Always provide a visible focus indicator.
+             * Keyboard users rely on this to know where they are.
+             */
+            :focus-visible {
+                outline: 3px solid #0b57d0;
+                outline-offset: 2px;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <h1>Account Settings</h1>
+            <p>Update profile details and security options.</p>
+
+            <!--
+                This is the trigger button.
+                We store focus here and return to it when the dialog closes.
+            -->
+            <button id="openBtn" type="button">Open Delete Confirmation</button>
+
+            <p><a href="#">Notifications</a></p>
+            <p><a href="#">Privacy</a></p>
+            <p><a href="#">Billing</a></p>
+        </main>
+
+        <!--
+            Why use <dialog>?
+            - It is semantic for dialogs.
+            - It supports modal mode via showModal().
+            - Escape key behavior is built in.
+            - Assistive tech understands it as a dialog context.
+
+            aria-labelledby and aria-describedby provide the dialog's
+            accessible name and description.
+        -->
+        <dialog
+            id="confirmDialog"
+            aria-labelledby="dialog-title"
+            aria-describedby="dialog-desc"
+        >
+            <h2 id="dialog-title">Confirm account deletion</h2>
+            <p id="dialog-desc">
+                This action permanently removes account data.
+            </p>
+
+            <!--
+                Every input needs a real <label>.
+                Placeholder text is not a substitute for a label.
+            -->
+            <label for="confirmInput">Type DELETE to confirm</label>
+            <input id="confirmInput" type="text" autocomplete="off" />
+
+            <div class="actions">
+                <!--
+                    Cancel is a real button, not a clickable div.
+                    Native button supports keyboard by default.
+                -->
+                <button class="secondary" id="cancelBtn" type="button">
+                    Cancel
+                </button>
+                <button class="danger" type="button">Delete Account</button>
+            </div>
+        </dialog>
+
+        <script>
+            // Cache DOM nodes once for clarity and performance.
+            const dialog = document.getElementById("confirmDialog");
+            const openBtn = document.getElementById("openBtn");
+            const cancelBtn = document.getElementById("cancelBtn");
+            const confirmInput = document.getElementById("confirmInput");
+
+            /*
+             * Open flow:
+             * 1) showModal() opens as a true modal (background is blocked).
+             * 2) Focus is moved inside to the first meaningful control.
+             */
+            openBtn.addEventListener("click", () => {
+                dialog.showModal();
+                confirmInput.focus();
+            });
+
+            /*
+             * Close flow from Cancel button.
+             * Focus return is mandatory for keyboard and screen reader users.
+             */
+            cancelBtn.addEventListener("click", () => {
+                dialog.close();
+            });
+
+            /*
+             * close event runs no matter how dialog closes (Cancel button,
+             * Escape, or script). Returning focus here is robust and centralized.
+             */
+            dialog.addEventListener("close", () => {
+                openBtn.focus();
+            });
+
+            /*
+             * Optional explicit Escape handling:
+             * The browser dispatches "cancel" on Escape before closing.
+             * We prevent default then close manually to keep behavior explicit.
+             */
+            dialog.addEventListener("cancel", (event) => {
+                event.preventDefault();
+                dialog.close();
+            });
+        </script>
+    </body>
 </html>

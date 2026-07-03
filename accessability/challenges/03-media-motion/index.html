@@ -1,58 +1,193 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Challenge 3: Media and Motion</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Verdana, sans-serif;
-      animation: colorPulse 0.4s infinite;
-    }
-    @keyframes colorPulse {
-      0% { background: #ffffff; }
-      50% { background: #c9f5ff; }
-      100% { background: #ffffff; }
-    }
-    .hero {
-      padding: 24px;
-      text-align: center;
-    }
-    .btn-icon {
-      border: 0;
-      background: #111;
-      color: #fff;
-      padding: 10px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .gallery img {
-      width: 280px;
-      height: 180px;
-      object-fit: cover;
-      margin: 8px;
-    }
-  </style>
-</head>
-<body>
-  <section class="hero">
-    <h1>Festival Recap 2026</h1>
-    <p>Best moments from our event.</p>
-    <button class="btn-icon">▶</button>
-  </section>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Challenge 3: Media and Motion</title>
+        <style>
+            /*
+             * Challenge 3 solved version (documented):
+             * We focus on three a11y goals:
+             * 1) Motion should be comfortable and optional for sensitive users.
+             * 2) Images and media should have useful text alternatives.
+             * 3) Controls must have clear accessible names.
+             */
+            :root {
+                --bg: #fffaf3;
+                --text: #1d2939;
+                --accent: #a14a00;
+                --panel: #ffffff;
+            }
 
-  <section class="gallery">
-    <img src="https://picsum.photos/id/10/600/400" alt="image">
-    <img src="https://picsum.photos/id/20/600/400">
-    <img src="https://picsum.photos/id/30/600/400" alt="photo">
-  </section>
+            body {
+                margin: 0;
+                font-family: Verdana, sans-serif;
+                color: var(--text);
+                background: radial-gradient(
+                    circle at top right,
+                    #ffe2c2,
+                    var(--bg) 45%
+                );
+                line-height: 1.6;
+            }
 
-  <section class="hero">
-    <h2>Highlight Video</h2>
-    <video controls autoplay>
-      <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
-    </video>
-  </section>
-</body>
+            /*
+             * We keep a gentle entrance animation (not a flashing infinite pulse).
+             * Infinite flashing can trigger discomfort and is hard to read.
+             */
+            .slide-in {
+                animation: slideIn 450ms ease;
+            }
+
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(8px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .wrap {
+                max-width: 980px;
+                margin: 0 auto;
+                padding: 24px;
+            }
+
+            .card {
+                background: var(--panel);
+                border-radius: 12px;
+                padding: 16px;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+                margin-bottom: 20px;
+            }
+
+            .btn-icon {
+                border: 0;
+                background: var(--accent);
+                color: #fff;
+                padding: 10px 14px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: 700;
+            }
+
+            .gallery {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 12px;
+            }
+
+            .gallery img {
+                width: 100%;
+                border-radius: 10px;
+            }
+
+            /*
+             * Critical accessibility rule:
+             * Respect user's OS/browser reduced-motion preference.
+             * When enabled, we disable animations and transitions.
+             */
+            @media (prefers-reduced-motion: reduce) {
+                * {
+                    animation: none !important;
+                    transition: none !important;
+                    scroll-behavior: auto !important;
+                }
+            }
+
+            /*
+             * Visible focus indicator for keyboard users.
+             */
+            :focus-visible {
+                outline: 3px solid #084298;
+                outline-offset: 2px;
+            }
+        </style>
+    </head>
+    <body>
+        <!--
+            Use a single main region so assistive tech users can jump to content.
+            slide-in class gives a subtle one-time animation on load.
+        -->
+        <main class="wrap slide-in">
+            <section class="card">
+                <h1>Festival Recap 2026</h1>
+                <p>Best moments from our event.</p>
+
+                <!--
+                    Icon-only controls need an accessible name.
+                    aria-label gives screen readers meaningful text.
+                -->
+                <button
+                    class="btn-icon"
+                    aria-label="Play highlight video"
+                    type="button"
+                >
+                    Play video
+                </button>
+            </section>
+
+            <!--
+                aria-labelledby connects this section to its heading,
+                giving the region a clear programmatic name.
+            -->
+            <section class="card" aria-labelledby="gallery-title">
+                <h2 id="gallery-title">Photo Gallery</h2>
+
+                <div class="gallery">
+                    <!--
+                        Informative images need descriptive alt text.
+                        Avoid vague values like "image" or "photo".
+                    -->
+                    <img
+                        src="https://picsum.photos/id/10/600/400"
+                        alt="Crowd gathering near the stage at sunset"
+                    />
+                    <img
+                        src="https://picsum.photos/id/20/600/400"
+                        alt="Close-up of the drummer performing live"
+                    />
+                    <img
+                        src="https://picsum.photos/id/30/600/400"
+                        alt="Vendors and guests in the food market area"
+                    />
+                </div>
+            </section>
+
+            <section class="card" aria-labelledby="video-title">
+                <h2 id="video-title">Highlight Video</h2>
+
+                <!--
+                    Do not autoplay media by default.
+                    Autoplay can be disorienting and distract users.
+
+                    preload="metadata" loads basic info only (lighter and safer).
+                -->
+                <video controls preload="metadata" width="100%">
+                    <source
+                        src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+                        type="video/mp4"
+                    />
+                </video>
+
+                <!--
+                    Captions and transcripts are key accessibility requirements.
+                    In production, provide:
+                    1) synchronized captions for spoken audio and key sounds
+                    2) a transcript for users who prefer or require text
+                -->
+                <p>
+                    Caption guidance: include synchronized captions for spoken
+                    content and meaningful sounds.
+                </p>
+                <p>
+                    Transcript guidance: provide a text transcript below the
+                    video for additional access.
+                </p>
+            </section>
+        </main>
+    </body>
 </html>

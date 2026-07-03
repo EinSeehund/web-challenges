@@ -11,9 +11,9 @@ Good:
 ```html
 <button type="button">Save</button>
 <nav aria-label="Primary">
-  <ul>
-    <li><a href="/">Home</a></li>
-  </ul>
+    <ul>
+        <li><a href="/">Home</a></li>
+    </ul>
 </nav>
 ```
 
@@ -32,14 +32,14 @@ Good:
 
 ```html
 <label for="email">Email address</label>
-<input id="email" name="email" type="email" autocomplete="email" required>
+<input id="email" name="email" type="email" autocomplete="email" required />
 <p id="email-help">Use your work email.</p>
 ```
 
 Better with help linkage:
 
 ```html
-<input aria-describedby="email-help" ...>
+<input aria-describedby="email-help" ... />
 ```
 
 Avoid placeholder-only labels.
@@ -50,15 +50,17 @@ Good:
 
 ```css
 :focus-visible {
-  outline: 3px solid #0b57d0;
-  outline-offset: 2px;
+    outline: 3px solid #0b57d0;
+    outline-offset: 2px;
 }
 ```
 
 Avoid removing outlines globally:
 
 ```css
-*:focus { outline: none; }
+*:focus {
+    outline: none;
+}
 ```
 
 ## 4) Headings and landmarks
@@ -69,10 +71,10 @@ Good page skeleton:
 <header>...</header>
 <nav aria-label="Primary">...</nav>
 <main id="main-content">
-  <h1>Page title</h1>
-  <section>
-    <h2>Section title</h2>
-  </section>
+    <h1>Page title</h1>
+    <section>
+        <h2>Section title</h2>
+    </section>
 </main>
 <footer>...</footer>
 ```
@@ -107,11 +109,11 @@ Good:
 
 ```css
 @media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
+    * {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
 }
 ```
 
