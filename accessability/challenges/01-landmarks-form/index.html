@@ -1,75 +1,132 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Challenge 1: Landmarks and Form</title>
-  <style>
-    body {
-      font-family: Georgia, serif;
-      margin: 0;
-      color: #6f6f6f;
-      background: #fafafa;
-    }
-    .topbar {
-      background: #ececec;
-      padding: 12px;
-    }
-    .menu-item {
-      display: inline-block;
-      margin-right: 16px;
-      color: #7d7d7d;
-      cursor: pointer;
-    }
-    .card {
-      max-width: 700px;
-      margin: 24px auto;
-      background: white;
-      padding: 24px;
-      border-radius: 12px;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
-    }
-    input, button {
-      width: 100%;
-      margin-top: 8px;
-      margin-bottom: 16px;
-      padding: 10px;
-      border: 1px solid #ddd;
-    }
-    *:focus {
-      outline: none;
-    }
-    .tiny {
-      font-size: 12px;
-      color: #9d9d9d;
-    }
-  </style>
-</head>
-<body>
-  <div class="topbar">
-    <div class="menu-item" onclick="location.href='#'">Home</div>
-    <div class="menu-item" onclick="location.href='#'">Pricing</div>
-    <div class="menu-item" onclick="location.href='#'">Contact</div>
-  </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Challenge 1: Landmarks and Form</title>
+        <style>
+            body {
+                font-family: Georgia, serif;
+                margin: 0;
+                color: #000000;
+                background: #fafafa;
+            }
+            .topbar {
+                background: #ececec;
+                padding: 12px;
+            }
+            .skip-link {
+                position: absolute;
+                left: 8px;
+                top: -40px;
+                background: #000000;
+                color: #ffffff;
+                padding: 6px 10px;
+            }
+            .skip-link:focus {
+                top: 8px;
+            }
+            nav ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+            .menu-item {
+                display: inline-block;
+                margin-right: 16px;
+                color: #000000;
+                cursor: pointer;
+            }
+            .card {
+                max-width: 700px;
+                margin: 24px auto;
+                background: white;
+                padding: 24px;
+                border-radius: 12px;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+            }
+            input,
+            button {
+                width: 100%;
+                margin-top: 8px;
+                margin-bottom: 16px;
+                padding: 10px;
+                border: 1px solid #ddd;
+            }
+            /* 
+            *:focus {
+                outline: none;
+            }
+             */
+            .tiny {
+                font-size: 12px;
+                color: #000000;
+            }
+            :focus-visible {
+                outline: 3px solid #005fcc;
+                outline-offset: 2px;
+            }
+        </style>
+    </head>
+    <body>
+        <a class="skip-link" href="#main-content">Skip to main content</a>
+        <header class="topbar">
+            <nav aria-label="Primary">
+                <ul>
+                    <li class="menu-item"><a href="#">Home</a></li>
+                    <li class="menu-item"><a href="#">Pricing</a></li>
+                    <li class="menu-item"><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
 
-  <div class="card">
-    <h3>Weekly Newsletter</h3>
-    <h1>Sign Up</h1>
+        <main class="card" id="main-content">
+            <h1>Weekly Newsletter</h1>
+            <h2>Sign Up</h2>
 
-    <form>
-      <input type="text" name="fullName" placeholder="Full name">
-      <div class="tiny">Use your legal name.</div>
+            <form>
+                <label for="fullName">Full name</label>
+                <input
+                    type="text"
+                    name="fullName"
+                    id="fullName"
+                    placeholder="Full name"
+                    autocomplete="name"
+                    required
+                    aria-describedby="fullName-help"
+                />
+                <div class="tiny" id="fullName-help">Use your legal name.</div>
 
-      <input type="email" name="email" placeholder="Email">
-      <div class="tiny">We will never spam you.</div>
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    autocomplete="email"
+                    required
+                    aria-describedby="email-help"
+                />
+                <div class="tiny" id="email-help">We will never spam you.</div>
 
-      <input type="password" name="password" placeholder="Password">
-      <div class="tiny">At least 8 characters.</div>
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                    autocomplete="new-password"
+                    required
+                    aria-describedby="password-help"
+                />
+                <div class="tiny" id="password-help">
+                    At least 8 characters.
+                </div>
 
-      <button type="submit">Create account</button>
-    </form>
-  </div>
+                <button type="submit">Create account</button>
+            </form>
+        </main>
 
-  <div class="topbar">Copyright Example Co.</div>
-</body>
+        <footer class="topbar">Copyright Example Co.</footer>
+    </body>
 </html>
