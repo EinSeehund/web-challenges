@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reference 3: Media and Motion</title>
+  <style>
+    :root {
+      --bg: #fffaf3;
+      --text: #1d2939;
+      --accent: #a14a00;
+      --panel: #ffffff;
+    }
+    body {
+      margin: 0;
+      font-family: "Palatino", serif;
+      color: var(--text);
+      background: radial-gradient(circle at top right, #ffe2c2, var(--bg) 45%);
+      line-height: 1.6;
+    }
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .card {
+      background: var(--panel);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      margin-bottom: 20px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .play {
+      background: var(--accent);
+      color: #fff;
+      border: 0;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .slide-in {
+      animation: slideIn 450ms ease;
+    }
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+    :focus-visible {
+      outline: 3px solid #084298;
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap slide-in">
+    <section class="card">
+      <h1>Festival Recap 2026</h1>
+      <p>Best moments from our event.</p>
+      <button class="play" aria-label="Play highlight video" type="button">Play video</button>
+    </section>
+
+    <section class="card" aria-labelledby="gallery-title">
+      <h2 id="gallery-title">Photo Gallery</h2>
+      <div class="gallery">
+        <img src="https://picsum.photos/id/10/600/400" alt="Crowd gathering near the stage at sunset">
+        <img src="https://picsum.photos/id/20/600/400" alt="Close-up of the drummer performing live">
+        <img src="https://picsum.photos/id/30/600/400" alt="Vendors and guests in the food market area">
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="video-title">
+      <h2 id="video-title">Highlight Video</h2>
+      <video controls preload="metadata" width="100%">
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+      </video>
+      <p>Caption guidance: include synchronized captions for spoken content and meaningful sounds.</p>
+      <p>Transcript guidance: provide a text transcript below the video for additional access.</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Challenge 2: Keyboard Modal</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Times New Roman", serif;
+      background: #f4f4f4;
+    }
+    .page {
+      padding: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      display: none;
+    }
+    .modal {
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 360px;
+      background: white;
+      padding: 16px;
+      border-radius: 10px;
+      display: none;
+    }
+    .fake-link {
+      color: blue;
+      text-decoration: underline;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>Account Settings</h1>
+    <p>Update profile details and security options.</p>
+
+    <button id="openBtn" type="button">Open Delete Confirmation</button>
+
+    <p><a href="#">Notifications</a></p>
+    <p><a href="#">Privacy</a></p>
+    <p><a href="#">Billing</a></p>
+  </div>
+
+  <div class="modal-backdrop" id="backdrop"></div>
+
+  <div class="modal" id="modal">
+    <h2>Confirm action</h2>
+    <p>This will remove your account data.</p>
+
+    <input type="text" placeholder="Type DELETE to confirm">
+
+    <div class="fake-link" id="cancel">Cancel</div>
+    <button type="button">Delete Account</button>
+  </div>
+
+  <script>
+    const modal = document.getElementById("modal");
+    const backdrop = document.getElementById("backdrop");
+    const openBtn = document.getElementById("openBtn");
+    const cancel = document.getElementById("cancel");
+
+    function openModal() {
+      modal.style.display = "block";
+      backdrop.style.display = "block";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+      backdrop.style.display = "none";
+    }
+
+    openBtn.addEventListener("click", openModal);
+    cancel.addEventListener("click", closeModal);
+  </script>
+</body>
+</html>
