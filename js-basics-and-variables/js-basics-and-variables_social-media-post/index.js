@@ -10,6 +10,12 @@ console.clear();
 */
 
 // --v-- write your code here --v--
+const postTitle = "Tonight's dinner";
+const postText =
+    "I am having a really nice salad tonight with roasted chickpeas, feta cheese and bellpepper";
+let postLikes = 289;
+const postUser = "Oleg";
+const isReported = true;
 
 // --^-- write your code here --^--
 
@@ -18,5 +24,14 @@ console.clear();
 */
 
 // --v-- write your code here --v--
+console.log(postTitle);
+console.log(postText);
+console.log(postLikes);
+console.log(postUser);
+console.log(isReported);
+
+postLikes++;
+
+console.log(postLikes);
 
 // --^-- write your code here --^--
