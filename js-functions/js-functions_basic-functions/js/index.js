@@ -10,6 +10,11 @@ console.clear();
 
 // --v-- write your code here --v--
 
+const bookTitle = "Lord of the Rings";
+const bookAuthor = "JRR Tolkien";
+let bookRating = 10;
+let bookCopiesSold = 150000000;
+
 // --^-- write your code here --^--
 
 /*
@@ -27,7 +32,17 @@ Then:
 */
 
 // --v-- write your code here --v--
+logBookData(bookTitle, bookAuthor, bookRating, bookCopiesSold);
 
+bookRating++;
+bookCopiesSold++;
+
+logBookData(bookTitle, bookAuthor, bookRating, bookCopiesSold);
+
+bookRating++;
+bookCopiesSold++;
+
+logBookData(bookTitle, bookAuthor, bookRating, bookCopiesSold);
 // --^-- write your code here --^--
 
 /*
@@ -40,5 +55,10 @@ Then:
 */
 
 // --v-- write your code here --v--
-
+function logBookData(title, author, rating, copiesSold) {
+    console.log(title);
+    console.log(author);
+    console.log(rating);
+    console.log(copiesSold);
+}
 // --^-- write your code here --^--
