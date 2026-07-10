@@ -1,16 +1,14 @@
 // Change this value to test different "weather" conditions.
-const weather = "snowy";
+const weather = "sunny";
 
 // Adjust the "temperature" value to trigger different messages (for Part 2 only).
-const temperature = -5;
+const temperature = 20;
 
 switch (weather) {
     case "sunny":
         if (temperature > 20) {
             console.log("It's sunny and warm!");
-        }
-    case "sunny":
-        if (temperature < 20) {
+        } else if (temperature <= 20) {
             console.log("It's sunny, but a bit chilly!");
         }
         break;
