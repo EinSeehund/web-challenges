@@ -5,16 +5,18 @@ import { checkFilteredNews, checkSortedNews } from "./utils/results.js";
 const container = document.querySelector('[data-js="card-container"]');
 
 // Part 1 - start here
-const filteredNews = news.filter(() => {
-  return true;
+const filteredNews = news.filter((newsItem) => {
+    return newsItem.categories.includes("politics");
 });
 
 // Part 2 - start here
-const sortedNews = filteredNews;
+const sortedNews = filteredNews.toSorted(
+    (newsA, newsB) => newsA.body.length - newsB.body.length,
+);
 
 sortedNews.forEach((news) => {
-  const cardElement = Card(news);
-  container.append(cardElement);
+    const cardElement = Card(news);
+    container.append(cardElement);
 });
 
 // Check your filter and sorting order here. Have a look at the console to see if you're right or wrong.
