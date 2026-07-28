@@ -22,6 +22,8 @@ export const getRelocatedCity = (
     const city2Array = getNameAndCountry(city2);
     const country = city2Array[1];
     //const [, country] = getNameAndCountry(city2);
+    console.log(city1);
+    //console.log({ ...city1, country });
     const city1Name = city1.name;
     return { name: city1Name, country: country };
 };
