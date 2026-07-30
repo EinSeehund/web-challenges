@@ -20,7 +20,7 @@ function Button({ color, disabled, text, onClick }) {
     return (
         <button
             style={{ backgroundColor: color }}
-            disabled={disabled ? true : false}
+            disabled={disabled}
             onClick={onClick}
         >
             {text}
