@@ -1,19 +1,27 @@
 .card {
-  width: 70%;
-  padding: 20px;
-  margin-inline: auto;
-  margin-block: 20px;
-  background-color: var(--color-water);
+    width: 70%;
+    padding: 20px;
+    margin-inline: auto;
+    margin-block: 20px;
+    background-color: var(--color-water);
 }
 
 .card--green {
-  background-color: lightgreen;
+    background-color: lightgreen;
 }
 
 .card--red {
-  background-color: lightcoral;
+    background-color: lightcoral;
 }
 
 .card--yellow {
-  background-color: lightyellow;
+    background-color: lightyellow;
+}
+
+.card--orange {
+    background-color: orange;
+}
+
+.card--purple {
+    background-color: rgb(255, 15, 255);
 }
