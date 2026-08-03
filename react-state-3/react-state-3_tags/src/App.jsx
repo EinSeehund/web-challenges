@@ -11,7 +11,7 @@ export default function App() {
     }
 
     function handleDeleteTag(tagToDelete) {
-        console.log(tagToDelete);
+        
         setTags(tags.filter((tag) => tag !== tagToDelete));
     }
 
