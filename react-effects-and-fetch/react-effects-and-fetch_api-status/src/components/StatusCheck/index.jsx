@@ -22,6 +22,7 @@ export default function StatusCheck() {
          * is okay and false if it is not.
          **/
         // --v-- write your code here --v--
+        setStatusIcon("⏳");
         try {
             const response = await fetch(apiStatusUrl);
             const data = await response.json();
@@ -46,7 +47,6 @@ export default function StatusCheck() {
                 className="status-check__button"
                 onClick={() => {
                     handleCheckApiStatus();
-                    setStatusIcon("⏳");
                 }}
             >
                 Check API Status
