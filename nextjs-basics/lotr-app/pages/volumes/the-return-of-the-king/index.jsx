@@ -18,7 +18,7 @@ export default function theReturnPage() {
         ))}
       </ul>
       <Image
-        src="/images/the-return-of-the-king.png"
+        src={volume.cover}
         alt="Book cover of The Return of the King"
         width={140}
         height={230}

@@ -17,7 +17,7 @@ export default function theTowersPage() {
         ))}
       </ul>
       <Image
-        src="/images/the-two-towers.png"
+        src={volume.cover}
         alt="Book cover of The Two Towers"
         width={140}
         height={230}

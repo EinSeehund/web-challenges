@@ -20,7 +20,7 @@ export default function theFellowshipPage() {
         ))}
       </ul>
       <Image
-        src="/images/the-fellowship-of-the-ring.png"
+        src={volume.cover}
         alt="Book cover of The Fellowship of the Ring"
         width={140}
         height={230}
