@@ -1,51 +1,83 @@
 import { Fragment, useState } from "react";
 import Winner from "../Winner";
 import {
-  CarButton,
-  AllCarRoutes,
-  DistanceHeadline,
-  Distance,
-  Track,
+    CarButton,
+    AllCarRoutes,
+    DistanceHeadline,
+    Distance,
+    Track,
 } from "./CarRace.styled";
 import { initialCars, getRandomDistance } from "../../utils/utils";
+import { produce } from "immer";
 
 const finishLine = 200;
 
 export default function CarRace() {
-  const [cars, setCars] = useState(initialCars);
+    const [cars, setCars] = useState(initialCars);
 
-  function moveCar(clickedCar) {
-    const coveredDistance = getRandomDistance();
-    console.log("clickedCar", clickedCar);
-    console.log("coveredDistance", coveredDistance);
-  }
+    // function moveCar(clickedCar) {
+    //     const coveredDistance = getRandomDistance();
+    //     console.log("clickedCar", clickedCar);
+    //     console.log("coveredDistance", coveredDistance);
+    //     setCars((prevCars) =>
+    //         prevCars.map((car) =>
+    //             car.emoji === clickedCar.emoji
+    //                 ? {
+    //                       ...car,
+    //                       position: {
+    //                           x: car.position.x + coveredDistance,
+    //                           lastDistance: coveredDistance,
+    //                       },
+    //                   }
+    //                 : car,
+    //         ),
+    //     );
+    // }
 
-  const winner = cars.find((car) => car.position.x >= finishLine);
+    function moveCar(clickedCar) {
+        const coveredDistance = getRandomDistance();
+        console.log("clickedCar", clickedCar);
+        console.log("coveredDistance", coveredDistance);
+        setCars(
+            produce((draft) => {
+                const index = draft.findIndex(
+                    (car) => car.emoji === clickedCar.emoji,
+                );
+                draft[index].position.x += coveredDistance;
+                draft[index].position.lastDistance = coveredDistance;
+            }),
+        );
+    }
 
-  return (
-    <>
-      {winner ? (
-        <Winner winner={winner} onRestart={() => setCars(initialCars)} />
-      ) : (
-        <AllCarRoutes $finishLine={finishLine}>
-          <DistanceHeadline>Last Distance</DistanceHeadline>
-          {cars.map((car) => (
-            <Fragment key={car.emoji}>
-              <Track>
-                <CarButton
-                  onClick={() => moveCar(car)}
-                  $positionX={car.position.x}
-                  $lastDistance={car.position.lastDistance}
-                  aria-label={`Move clicked car forward`}
-                >
-                  {car.emoji}
-                </CarButton>
-              </Track>
-              <Distance>{car.position.lastDistance}</Distance>
-            </Fragment>
-          ))}
-        </AllCarRoutes>
-      )}
-    </>
-  );
+    const winner = cars.find((car) => car.position.x >= finishLine);
+
+    return (
+        <>
+            {winner ? (
+                <Winner
+                    winner={winner}
+                    onRestart={() => setCars(initialCars)}
+                />
+            ) : (
+                <AllCarRoutes $finishLine={finishLine}>
+                    <DistanceHeadline>Last Distance</DistanceHeadline>
+                    {cars.map((car) => (
+                        <Fragment key={car.emoji}>
+                            <Track>
+                                <CarButton
+                                    onClick={() => moveCar(car)}
+                                    $positionX={car.position.x}
+                                    $lastDistance={car.position.lastDistance}
+                                    aria-label={`Move clicked car forward`}
+                                >
+                                    {car.emoji}
+                                </CarButton>
+                            </Track>
+                            <Distance>{car.position.lastDistance}</Distance>
+                        </Fragment>
+                    ))}
+                </AllCarRoutes>
+            )}
+        </>
+    );
 }
