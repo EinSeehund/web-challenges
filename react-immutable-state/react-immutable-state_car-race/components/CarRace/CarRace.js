@@ -16,9 +16,9 @@ export default function CarRace() {
     const [cars, setCars] = useState(initialCars);
 
     // function moveCar(clickedCar) {
-    //     const coveredDistance = getRandomDistance();
-    //     console.log("clickedCar", clickedCar);
-    //     console.log("coveredDistance", coveredDistance);
+    // const coveredDistance = getRandomDistance();
+    // console.log("clickedCar", clickedCar);
+    // console.log("coveredDistance", coveredDistance);
     //     setCars((prevCars) =>
     //         prevCars.map((car) =>
     //             car.emoji === clickedCar.emoji
